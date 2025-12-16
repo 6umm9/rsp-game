@@ -9,14 +9,12 @@
 
 <body>
     <script>
+        let humanScore = 0;
+        let computerScore = 0;
+
         function getComputerChoice() {
-            // Generate a random number between 0 and 1
             const randomNum = Math.random();
 
-            // Return choice based on probability ranges
-            // 0 - 0.33... = rock
-            // 0.33... - 0.66... = paper
-            // 0.66... - 1 = scissors
             if (randomNum < 1 / 3) {
                 return "rock";
             } else if (randomNum < 2 / 3) {
@@ -27,19 +25,40 @@
         }
 
         console.log("Hello World");
-        // Test the function
         console.log("Computer choice:", getComputerChoice());
 
         function getHumanChoice() {
-            // Get user input with a prompt
             let choice = prompt("Rock, Paper, or Scissors?");
-
-            // Return the choice (we assume it's valid for now)
             return choice;
         }
 
-        // Test the human choice function
         console.log("Human choice:", getHumanChoice());
+
+        function playRound(humanChoice, computerChoice) {
+            const humanSelection = humanChoice.toLowerCase();
+            const computerSelection = computerChoice;
+
+            if (humanSelection === computerSelection) {
+                console.log(`It's a tie! You both chose ${humanSelection}`);
+                return;
+            }
+
+            if (
+                (humanSelection === "rock" && computerSelection === "scissors") ||
+                (humanSelection === "paper" && computerSelection === "rock") ||
+                (humanSelection === "scissors" && computerSelection === "paper")
+            ) {
+                humanScore++;
+                console.log(`You win! ${humanSelection} beats ${computerSelection}`);
+            } else {
+                computerScore++;
+                console.log(`You lose! ${computerSelection} beats ${humanSelection}`);
+            }
+        }
+
+        const humanSelection = "ROCK";
+        const computerSelection = getComputerChoice();
+        playRound(humanSelection, computerSelection);
     </script>
 </body>
 
